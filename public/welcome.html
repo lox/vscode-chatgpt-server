@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // Call the user info endpoint using the fetch browser library
+  fetch('/user')
+    // Parse the response as JSON
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Not Authorized');
+      }
+      return res.json();
+    })
+    .then(res => {
+      // Once we get the response (which has many fields)
+      // Write "Welcome <user name>" to the documents body
+      const nameNode = document.createTextNode(`Welcome, ${res.name}`)
+      document.body.appendChild(nameNode)
+    })
+    .catch(error => {
+      alert('Error: ' + error.message);
+    });
+</script>
+
+</html>
